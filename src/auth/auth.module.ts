@@ -6,6 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local.strategy';
 import { LocalGuard } from './guards/local.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { UsuarioModule } from 'src/usuario/usuario.module';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       secret: 'somoslosmejores',
       signOptions: { expiresIn: '1d' },
     }),
-    DocenteModule, // implementar el modulo de usuarios
+    UsuarioModule, // implementar el modulo de usuarios
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, LocalGuard, JwtStrategy],

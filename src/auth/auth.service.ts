@@ -11,16 +11,16 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser({ nombre_usuario, contrasenia }: AuthPayloadDTO) {
+  async validateUser({ nombre_usuario, password }: AuthPayloadDTO) {
     const findUser =
       await this.usuarioService.findOneByUsername(nombre_usuario);
     if (!findUser) {
       throw new UnauthorizedException('Credenciales invalidas');
     }
 
-    const isMatch = await bcrypt.compare(contrasenia, findUser.contrasenia);
+    const isMatch = await bcrypt.compare(password, findUser.password);
     if (isMatch) {
-      const { contrasenia, persona, cargo, ...userDetails } = findUser;
+      const { password, persona, fecha_registro, ...userDetails } = findUser;
       return this.jwtService.sign(userDetails); 
     }
 

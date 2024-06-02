@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany,JoinTable } from 'typeorm';
-import { Personas } from '../persona/persona.entity';
+import { Persona } from '../persona/persona.entity';
 import {Roles} from '../rol/rol.entity';
 @Entity('usuarios')
-export class Usuarios {
+export class Usuario {
   @PrimaryGeneratedColumn()
   id_usuario: number;
 
@@ -12,9 +12,9 @@ export class Usuarios {
   @Column()
   password: string;
 
-  @OneToOne(() => Personas)
+  @OneToOne(() => Persona, persona => persona.usuario, { cascade: true })
   @JoinColumn({ name: 'id_persona' })
-  id_persona: Personas;
+  persona: Persona;
 
   @Column()
   fecha_registro: Date;
@@ -28,17 +28,7 @@ export class Usuarios {
   @Column()
   fecha_ultima_conexion: Date;
 
-  @ManyToMany(() => Roles, rol => rol.usuarios)
-  @JoinTable({
-    name: 'usuarios_roles', 
-    joinColumn: {
-      name: 'id_usuario',
-      referencedColumnName: 'id_usuario',
-    },
-    inverseJoinColumn: {
-      name: 'id_rol',
-      referencedColumnName: 'id_rol',
-    },
-  })
+  @ManyToMany(() => Roles)
+  @JoinTable({ name: 'usuarios_roles' })
   roles: Roles[];
 }

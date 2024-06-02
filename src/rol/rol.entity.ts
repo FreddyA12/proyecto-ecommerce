@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
-import { Usuarios } from '../usuario/usuario.entity';
+import { Usuario } from '../usuario/usuario.entity';
 
 @Entity('roles')
 export class Roles {
@@ -9,6 +9,6 @@ export class Roles {
   @Column({ type: 'varchar', length: 255 })
   tipo_rol: string;
 
-  @ManyToMany(() => Usuarios, usuario => usuario.roles)
-  usuarios: Usuarios[];
+  @ManyToMany(() => Usuario, usuario => usuario.roles)
+  usuarios: Usuario[];
 }

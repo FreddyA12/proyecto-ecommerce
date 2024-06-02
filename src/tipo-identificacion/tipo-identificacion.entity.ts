@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn,  ManyToOne } from 'typeorm';
-import{Personas} from '../persona/persona.entity';
+import { Entity, Column, PrimaryGeneratedColumn,  ManyToOne, OneToMany } from 'typeorm';
+import{Persona} from '../persona/persona.entity';
 
 
-@Entity('tipos_identificacion')
+@Entity('tipos_identificaciones')
 export class TipoIdentificacion {
     @PrimaryGeneratedColumn()
     id_tipo_identificacion: number;
@@ -13,7 +13,7 @@ export class TipoIdentificacion {
     @Column()
     estado: String;
 
-    @ManyToOne(() => Personas, persona => persona.tipo_identificacion)
-    persona: Personas;
+    @OneToMany(() => Persona, persona => persona.tipoIdentificacion)
+    personas: Persona[];
 
 }

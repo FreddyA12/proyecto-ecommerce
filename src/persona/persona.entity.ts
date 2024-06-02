@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn ,OneToOne, OneToMany, JoinColumn} from 'typeorm';
-import { Usuarios } from '../usuario/usuario.entity';
+import { Entity, Column, PrimaryGeneratedColumn ,OneToOne, OneToMany, JoinColumn, ManyToMany, ManyToOne} from 'typeorm';
+import { Usuario } from '../usuario/usuario.entity';
 import { TipoIdentificacion } from '../tipo-identificacion/tipo-identificacion.entity';
 
 @Entity('personas')
-export class Personas {
+export class Persona {
   @PrimaryGeneratedColumn()
   id_persona: number;
 
@@ -16,9 +16,10 @@ export class Personas {
   @Column()
   identificacion: string;
 
-  @OneToMany(() => TipoIdentificacion, tipoIdentificacion => tipoIdentificacion.persona)
-  tipo_identificacion: TipoIdentificacion[];
- 
+
+  @ManyToOne(() => TipoIdentificacion)
+  @JoinColumn({name: "id_tipo_identificacion"})
+  tipoIdentificacion: TipoIdentificacion;
 
   @Column()
   direccion: string;
@@ -33,11 +34,13 @@ export class Personas {
   correo_electronico: string;
 
   @Column()
-  estado: string;
+  estado: string; //inactivo o activo
 
   @Column()
   eliminado: boolean;
 
-    @OneToOne(() => Usuarios, usuario => usuario.id_persona)
-    usuario: Usuarios;
+    @OneToOne(() => Usuario, usuario => usuario.persona)
+    usuario: Usuario;
+
+
 }

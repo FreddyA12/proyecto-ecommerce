@@ -6,8 +6,8 @@ export class Factura{
     @PrimaryGeneratedColumn()
     id_factura: number;
 
-    @Column({ type: 'date' })
-    fecha_factura: string;
+    @Column({ type: 'date' })  // Asegúrate de que el tipo coincida con el uso en el servicio
+    fecha_factura: Date;
 
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     total: number;

@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany,JoinTable, OneToMany } from 'typeorm';
 import { Persona } from '../persona/persona.entity';
 import {Roles} from '../rol/rol.entity';
-import { Factura } from 'src/facturas/facturas.entity';
+import { Pedido } from 'src/pedido/pedido.entity';
 @Entity('usuarios')
 export class Usuario {
   @PrimaryGeneratedColumn()
@@ -33,6 +33,6 @@ export class Usuario {
   @JoinTable({ name: 'usuarios_roles' })
   roles: Roles[];
 
-  @OneToMany(() => Factura, factura => factura.usuario)
-  facturas: Factura[];
+  @OneToMany(() => Pedido, pedido => pedido.usuario)
+  pedidos: Pedido[];
 }

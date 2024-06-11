@@ -8,10 +8,13 @@ import { AuthModule } from './auth/auth.module';
 import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
-import { Roles } from './rol/rol.entity';
+import { Rol } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
 import { MarcaModule } from './marca/marca.module';
+import { Marca } from './marca/marca.entity';
+import { Categoria } from './categoria/categoria.entity';
+import { Producto } from './producto/producto.entity';
 
 @Module({
   imports: [
@@ -22,7 +25,7 @@ import { MarcaModule } from './marca/marca.module';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario,Persona,TipoIdentificacion,Roles],
+      entities: [Usuario,Persona,TipoIdentificacion,Rol,Marca,Categoria,Producto ],
       synchronize:true
     }),
     UsuarioModule,

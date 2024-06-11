@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn ,OneToOne, OneToMany, JoinColumn, ManyToMany, ManyToOne} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { Usuario } from '../usuario/usuario.entity';
 import { TipoIdentificacion } from '../tipo-identificacion/tipo-identificacion.entity';
 
@@ -16,9 +23,8 @@ export class Persona {
   @Column()
   identificacion: string;
 
-
   @ManyToOne(() => TipoIdentificacion)
-  @JoinColumn({name: "id_tipo_identificacion"})
+  @JoinColumn({ name: 'id_tipo_identificacion' })
   tipoIdentificacion: TipoIdentificacion;
 
   @Column()
@@ -39,8 +45,6 @@ export class Persona {
   @Column()
   eliminado: boolean;
 
-    @OneToOne(() => Usuario, usuario => usuario.persona)
-    usuario: Usuario;
-
-
+  @OneToOne(() => Usuario, (usuario) => usuario.persona)
+  usuario: Usuario;
 }

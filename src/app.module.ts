@@ -12,8 +12,9 @@ import { Roles } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
 import { MarcaModule } from './marca/marca.module';
-import { MetodoPagoController } from './metodo-pago/metodo-pago.controller';
 import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
+import { Pedido } from './pedido/pedido.entity';
+import { MetodoPago } from './metodo-pago/metodo-pago.entity';
 
 @Module({
   imports: [
@@ -24,8 +25,8 @@ import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario,Persona,TipoIdentificacion,Roles],
-      synchronize:true
+      entities: [Usuario, Persona, TipoIdentificacion, Roles, Pedido, MetodoPago],
+      synchronize: true,
     }),
     UsuarioModule,
     PersonaModule,
@@ -35,9 +36,9 @@ import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
     CategoriaModule,
     ProductoModule,
     MarcaModule,
-    MetodoPagoModule
+    MetodoPagoModule,
   ],
-  controllers: [MetodoPagoController],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}

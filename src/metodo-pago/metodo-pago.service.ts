@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MetodoPago } from './metodo-pago.entity';
 import { Repository } from 'typeorm';
+import { DtoMetodoPago } from './dto/metodo-pago.dto';
 
 @Injectable()
 export class MetodoPagoService {
@@ -10,13 +11,10 @@ export class MetodoPagoService {
         private metodoRepository: Repository<MetodoPago>,
       ) {}
 
-    // Crear una nueva factura
-    async create(createPedidoDto: CreatePedidoDto): Promise<Pedido> {
-        const pedido = new Pedido();
-        // Asegúrate de que la fecha sea un objeto Date
-        pedido.fecha = new Date(createPedidoDto.fecha);
-        pedido.total = createPedidoDto.total;
-
-        return await this.pedidoRepository.save(pedido);
+    
+    async create(dtoMetodoPago: DtoMetodoPago): Promise<MetodoPago> {
+        
+        const metodoPago = this.metodoRepository.create(dtoMetodoPago);
+        return await this.metodoRepository.save(metodoPago);
     }
 }

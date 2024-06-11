@@ -11,6 +11,7 @@ import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.en
 import { Roles } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
+import { MarcaModule } from './marca/marca.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { ProductoModule } from './producto/producto.module';
     RolModule,
     AuthModule,
     CategoriaModule,
-    ProductoModule
+    ProductoModule,
+    MarcaModule
   ],
   controllers: [],
   providers: [],

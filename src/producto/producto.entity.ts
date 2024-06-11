@@ -1,5 +1,6 @@
 // producto.entity.ts
 import { Categoria } from 'src/categoria/categoria.entity';
+import { Marca } from 'src/marca/marca.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('Productos')
@@ -24,7 +25,7 @@ export class Producto {
   estado: string;
 
   @ManyToOne(() => Marca, marca => marca.productos)
-  @JoinColumn({ name: 'id_categoria' })
+  @JoinColumn({ name: 'id_marca' })
   marca: Marca;
 
   @Column()

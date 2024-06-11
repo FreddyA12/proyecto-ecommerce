@@ -12,6 +12,8 @@ import { Roles } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
 import { MarcaModule } from './marca/marca.module';
+import { MetodoPagoController } from './metodo-pago/metodo-pago.controller';
+import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
 
 @Module({
   imports: [
@@ -32,9 +34,10 @@ import { MarcaModule } from './marca/marca.module';
     AuthModule,
     CategoriaModule,
     ProductoModule,
-    MarcaModule
+    MarcaModule,
+    MetodoPagoModule
   ],
-  controllers: [],
+  controllers: [MetodoPagoController],
   providers: [],
 })
 export class AppModule {}

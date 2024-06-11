@@ -9,6 +9,8 @@ import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
 import { Roles } from './rol/rol.entity';
+import { CategoriaModule } from './categoria/categoria.module';
+import { ProductoModule } from './producto/producto.module';
 import { MarcaModule } from './marca/marca.module';
 
 @Module({
@@ -28,6 +30,8 @@ import { MarcaModule } from './marca/marca.module';
     TipoIdentificacionModule,
     RolModule,
     AuthModule,
+    CategoriaModule,
+    ProductoModule,
     MarcaModule
   ],
   controllers: [],

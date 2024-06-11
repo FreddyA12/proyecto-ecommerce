@@ -9,6 +9,7 @@ import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
 import { Roles } from './rol/rol.entity';
+import { MarcaModule } from './marca/marca.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { Roles } from './rol/rol.entity';
     PersonaModule,
     TipoIdentificacionModule,
     RolModule,
-    AuthModule
+    AuthModule,
+    MarcaModule
   ],
   controllers: [],
   providers: [],

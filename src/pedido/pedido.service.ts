@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pedido } from './pedido.entity';
 import { Repository } from 'typeorm';
-import { CreatePedidoDto} from './dto/pedido.dto';
+import { CreatePedidoDto } from './dto/pedido.dto';
 
 @Injectable()
 export class PedidoService {

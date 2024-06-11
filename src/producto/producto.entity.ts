@@ -1,7 +1,16 @@
 // producto.entity.ts
 import { Categoria } from 'src/categoria/categoria.entity';
 import { Marca } from 'src/marca/marca.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Detalle_pedido } from 'src/detalle_pedido/detalle_pedido.entity';
+
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 
 @Entity('Productos')
 export class Producto {
@@ -14,7 +23,7 @@ export class Producto {
   @Column()
   precio_unitario: number;
 
-  @ManyToOne(() => Categoria, categoria => categoria.productos)
+  @ManyToOne(() => Categoria, (categoria) => categoria.productos)
   @JoinColumn({ name: 'id_categoria' })
   categoria: Categoria;
 
@@ -24,12 +33,14 @@ export class Producto {
   @Column()
   estado: string;
 
-  @ManyToOne(() => Marca, marca => marca.productos)
+  @ManyToOne(() => Marca, (marca) => marca.productos)
   @JoinColumn({ name: 'id_marca' })
   marca: Marca;
 
   @Column()
   descripcion: string;
 
+  @OneToMany(() => Detalle_pedido, (detalle) => detalle.producto)
+  detalles: Detalle_pedido[];
   //Agregar mas relaciones de acuerdo al mapeo
 }

@@ -1,13 +1,22 @@
-import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
 import { Usuario } from 'src/usuario/usuario.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Detalle_pedido } from 'src/detalle_pedido/detalle_pedido.entity';
 
-@Entity('pedidos') // aquí va el nombre de la tabla de la base
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  OneToMany,
+} from 'typeorm';
+import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
+
+@Entity('pedidos') // aqui va el nombre de la tabla de la base
 export class Pedido {
   @PrimaryGeneratedColumn()
   id_pedido: number;
 
-  @Column({ type: 'timestamp' })  // Asegúrate de que el tipo coincida con el uso en el servicio
+  @Column({ type: 'timestamp' }) // Asegúrate de que el tipo coincida con el uso en el servicio
   fecha: Date;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
@@ -27,4 +36,9 @@ export class Pedido {
   @ManyToOne(() => MetodoPago, metodoPago => metodoPago.pedidos)
   @JoinColumn({ name: 'id_metodo_pago' })
   metodoPago: MetodoPago;
+ 
+  @OneToMany(() => Detalle_pedido, (detalle) => detalle.pedido)
+  detalles: Detalle_pedido[];
+
+  // falta el id del metodo del pago
 }

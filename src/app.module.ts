@@ -9,9 +9,10 @@ import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
 import { Roles } from './rol/rol.entity';
+import { MarcaModule } from './marca/marca.module';
+import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
-import { MarcaModule } from './marca/marca.module';
 
 @Module({
   imports: [
@@ -22,17 +23,18 @@ import { MarcaModule } from './marca/marca.module';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario,Persona,TipoIdentificacion,Roles],
-      synchronize:true
+      entities: [Usuario, Persona, TipoIdentificacion, Roles],
+      synchronize: true,
     }),
     UsuarioModule,
     PersonaModule,
     TipoIdentificacionModule,
     RolModule,
     AuthModule,
+    MarcaModule,
+    DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
-    MarcaModule
   ],
   controllers: [],
   providers: [],

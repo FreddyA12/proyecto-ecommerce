@@ -7,6 +7,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Producto } from 'src/producto/producto.entity';
+import { Pedido } from 'src/pedido/pedido.entity';
 
 @Entity('detalles_pedidos')
 export class Detalle_pedido {
@@ -14,7 +15,7 @@ export class Detalle_pedido {
   id_detalle_pedido: number;
 
   @Column()
-  subtotal: Double;
+  subtotal: number;
 
   @Column()
   cantidad: number;
@@ -22,4 +23,10 @@ export class Detalle_pedido {
   @ManyToOne(() => Producto, (producto) => producto.detalles)
   @JoinColumn({ name: 'id_producto' })
   producto: Producto;
+
+  @ManyToOne(() => Pedido, (pedido) => pedido.detalles)
+  @JoinColumn({ name: 'id_pedido' })
+  pedido: Pedido;
+
+  //falta id promocion mapeo
 }

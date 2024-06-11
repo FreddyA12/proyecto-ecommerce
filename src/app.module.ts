@@ -15,6 +15,8 @@ import { MarcaModule } from './marca/marca.module';
 import { Marca } from './marca/marca.entity';
 import { Categoria } from './categoria/categoria.entity';
 import { Producto } from './producto/producto.entity';
+import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
+import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { Producto } from './producto/producto.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario,Persona,TipoIdentificacion,Rol,Marca,Categoria,Producto ],
+      entities: [Usuario,Persona,TipoIdentificacion,Rol,Marca,Categoria,Producto, Detalle_pedido],
       synchronize:true
     }),
     UsuarioModule,
@@ -33,9 +35,10 @@ import { Producto } from './producto/producto.entity';
     TipoIdentificacionModule,
     RolModule,
     AuthModule,
+    MarcaModule,
+    DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
-    MarcaModule
   ],
   controllers: [],
   providers: [],

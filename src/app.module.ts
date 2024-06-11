@@ -11,6 +11,8 @@ import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.en
 import { Roles } from './rol/rol.entity';
 import { MarcaModule } from './marca/marca.module';
 import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
+import { CategoriaModule } from './categoria/categoria.module';
+import { ProductoModule } from './producto/producto.module';
 
 @Module({
   imports: [
@@ -21,8 +23,8 @@ import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario,Persona,TipoIdentificacion,Roles],
-      synchronize:true
+      entities: [Usuario, Persona, TipoIdentificacion, Roles],
+      synchronize: true,
     }),
     UsuarioModule,
     PersonaModule,
@@ -30,7 +32,9 @@ import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
     RolModule,
     AuthModule,
     MarcaModule,
-    DetallePedidoModule
+    DetallePedidoModule,
+    CategoriaModule,
+    ProductoModule,
   ],
   controllers: [],
   providers: [],

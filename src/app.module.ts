@@ -13,6 +13,7 @@ import { MarcaModule } from './marca/marca.module';
 import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
+import { PromocionModule } from './promocion/promocion.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ProductoModule } from './producto/producto.module';
     DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
+    PromocionModule,
   ],
   controllers: [],
   providers: [],

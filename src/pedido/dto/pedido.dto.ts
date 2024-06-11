@@ -1,30 +1,31 @@
-// src/facturas/dto/factura.dto.ts
-import { IsNotEmpty, IsNumber, IsDate, IsOptional } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsString} from "class-validator";
 
-export class CreateFacturaDto {
-    @IsNotEmpty()
-    @IsDate()
-    fecha_factura: Date;
 
+export class CreatePedidoDto{
+
+    @IsNumber()
     @IsNotEmpty()
-    @IsNumber({ maxDecimalPlaces: 2 })
+    id_usuario: number;
+
+    @IsDateString()
+    @IsNotEmpty()
+    fecha: string; 
+
+    @IsNumber()
+    @IsNotEmpty()
     total: number;
 
-    @IsOptional()
+    @IsString()
+    @IsNotEmpty() 
+    estado: string;
+    
     @IsNumber()
-    id_usuario?: number; // Puedes incluir el id_usuario si se espera que el cliente envíe esta información
+    @IsNotEmpty()
+    subtotal: number;
+    
+    @IsNumber()
+    @IsNotEmpty()
+    id_metodo_pago: number;
+
 }
 
-export class UpdateFacturaDto {
-  @IsOptional()
-  @IsNumber()
-  id_cliente?: number;
-
-  @IsOptional()
-  @IsDate()
-  fecha_factura?: Date;
-
-  @IsOptional()
-  @IsNumber()
-  total?: number;
-}

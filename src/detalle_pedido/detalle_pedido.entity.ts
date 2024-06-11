@@ -28,5 +28,5 @@ export class Detalle_pedido {
   @JoinColumn({ name: 'id_pedido' })
   pedido: Pedido;
 
-  //falta id promocion mapeo
+
 }

@@ -1,10 +1,10 @@
 // src/facturas/dto/factura.dto.ts
 import { IsNotEmpty, IsNumber, IsDate, IsOptional } from 'class-validator';
 
-export class CreateFacturaDto {
+export class CreatePedidoDto {
     @IsNotEmpty()
     @IsDate()
-    fecha_factura: Date;
+    fecha: Date;
 
     @IsNotEmpty()
     @IsNumber({ maxDecimalPlaces: 2 })

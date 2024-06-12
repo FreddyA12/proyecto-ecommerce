@@ -20,6 +20,10 @@ import { Categoria } from './categoria/categoria.entity';
 import { Producto } from './producto/producto.entity';
 import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
 import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
+import { DevolucionController } from './devolucion/devolucion.controller';
+import { DevolucionService } from './devolucion/devolucion.service';
+import { DevolucionModule } from './devolucion/devolucion.module';
+import { Devolucion } from './devolucion/devolucion.entity';
 
 @Module({
   imports: [
@@ -30,7 +34,7 @@ import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago, Pedido, Detalle_pedido], // Asegúrate de incluir Pedido aquí
+      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago, Pedido, Detalle_pedido, Devolucion], // Asegúrate de incluir Pedido aquí
       synchronize: true,
     }),
     UsuarioModule,
@@ -43,8 +47,8 @@ import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
     CategoriaModule,
     ProductoModule,
     MetodoPagoModule,
+    DevolucionModule,
   ],
-  controllers: [],
-  providers: [],
+  
 })
 export class AppModule {}

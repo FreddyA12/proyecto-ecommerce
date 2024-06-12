@@ -20,6 +20,9 @@ import { Categoria } from './categoria/categoria.entity';
 import { Producto } from './producto/producto.entity';
 import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
 import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
+import { DevolucionController } from './devolucion/devolucion.controller';
+import { DevolucionService } from './devolucion/devolucion.service';
+import { DevolucionModule } from './devolucion/devolucion.module';
 
 @Module({
   imports: [
@@ -43,8 +46,9 @@ import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
     CategoriaModule,
     ProductoModule,
     MetodoPagoModule,
+    DevolucionModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [DevolucionController],
+  providers: [DevolucionService],
 })
 export class AppModule {}

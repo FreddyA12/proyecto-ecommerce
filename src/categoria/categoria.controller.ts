@@ -8,6 +8,7 @@ import { Categoria } from './categoria.entity';
 export class CategoriasController {
   constructor(private readonly categoriasService: CategoriaService) {}
 
+  
   @Post()
   create(@Body() createCategoriaDto: CreateCategoriaDto): Promise<Categoria> {
     return this.categoriasService.create(createCategoriaDto);

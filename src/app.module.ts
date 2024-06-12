@@ -12,6 +12,9 @@ import { Rol } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
 import { MarcaModule } from './marca/marca.module';
+import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
+import { Pedido } from './pedido/pedido.entity'; // Asegúrate de importar la entidad Pedido
+import { MetodoPago } from './metodo-pago/metodo-pago.entity';
 import { Marca } from './marca/marca.entity';
 import { Categoria } from './categoria/categoria.entity';
 import { Producto } from './producto/producto.entity';
@@ -27,8 +30,8 @@ import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario,Persona,TipoIdentificacion,Rol,Marca,Categoria,Producto, Detalle_pedido],
-      synchronize:true
+      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago, Pedido, Detalle_pedido], // Asegúrate de incluir Pedido aquí
+      synchronize: true,
     }),
     UsuarioModule,
     PersonaModule,
@@ -39,6 +42,7 @@ import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
     DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
+    MetodoPagoModule,
   ],
   controllers: [],
   providers: [],

@@ -23,6 +23,7 @@ import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
 import { DevolucionController } from './devolucion/devolucion.controller';
 import { DevolucionService } from './devolucion/devolucion.service';
 import { DevolucionModule } from './devolucion/devolucion.module';
+import { Devolucion } from './devolucion/devolucion.entity';
 
 @Module({
   imports: [
@@ -33,7 +34,7 @@ import { DevolucionModule } from './devolucion/devolucion.module';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago, Pedido, Detalle_pedido], // Asegúrate de incluir Pedido aquí
+      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago, Pedido, Detalle_pedido, Devolucion], // Asegúrate de incluir Pedido aquí
       synchronize: true,
     }),
     UsuarioModule,
@@ -48,7 +49,6 @@ import { DevolucionModule } from './devolucion/devolucion.module';
     MetodoPagoModule,
     DevolucionModule,
   ],
-  controllers: [DevolucionController],
-  providers: [DevolucionService],
+  
 })
 export class AppModule {}

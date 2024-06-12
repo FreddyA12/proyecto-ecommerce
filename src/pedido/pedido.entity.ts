@@ -10,6 +10,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
+import { Devolucion } from 'src/devolucion/devolucion.entity';
 
 @Entity('pedidos') // aqui va el nombre de la tabla de la base
 export class Pedido {
@@ -40,5 +41,10 @@ export class Pedido {
   @OneToMany(() => Detalle_pedido, (detalle) => detalle.pedido)
   detalles: Detalle_pedido[];
 
-  // falta el id del metodo del pago
+  @OneToMany(()=> Devolucion, devolucion=> devolucion.pedido)
+  devoluciones: Devolucion[];
+
+  
+
+
 }

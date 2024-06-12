@@ -1,6 +1,7 @@
 import { Usuario } from 'src/usuario/usuario.entity';
 import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
 import { Detalle_pedido } from 'src/detalle_pedido/detalle_pedido.entity';
+
 import {
   Column,
   Entity,
@@ -9,6 +10,8 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
 } from 'typeorm';
+import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
+import { Devolucion } from 'src/devolucion/devolucion.entity';
 
 @Entity('pedidos') // aqui va el nombre de la tabla de la base
 export class Pedido {
@@ -27,16 +30,22 @@ export class Pedido {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   subtotal: number;
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.pedidos)
+  @ManyToOne(() => Usuario, usuario => usuario.pedidos)
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
+  // Falta el id del método de pago
+  @ManyToOne(() => MetodoPago, metodoPago => metodoPago.pedidos)
+  @JoinColumn({ name: 'id_metodo_pago' })
+  metodoPago: MetodoPago;
+ 
   @OneToMany(() => Detalle_pedido, (detalle) => detalle.pedido)
   detalles: Detalle_pedido[];
 
-  @ManyToOne(() => MetodoPago, (metodoPago) => metodoPago.pedidos)
-  @JoinColumn({ name: 'id_metodo_pago' })
-  metodoPago: MetodoPago;
+  @OneToMany(()=> Devolucion, devolucion=> devolucion.pedido)
+  devoluciones: Devolucion[];
 
-  // falta el id del metodo del pago
+  
+
+
 }

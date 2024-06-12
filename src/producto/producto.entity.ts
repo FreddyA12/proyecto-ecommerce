@@ -11,6 +11,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+import { Devolucion } from 'src/devolucion/devolucion.entity';
 
 @Entity('Productos')
 export class Producto {
@@ -43,4 +44,6 @@ export class Producto {
   @OneToMany(() => Detalle_pedido, (detalle) => detalle.producto)
   detalles: Detalle_pedido[];
   //Agregar mas relaciones de acuerdo al mapeo
+  @OneToMany(() => Devolucion, devolucion => devolucion.producto)
+  devoluciones: Devolucion[];
 }

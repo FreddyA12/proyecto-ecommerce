@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany,JoinTable, OneToMany } from 'typeorm';
 import { Persona } from '../persona/persona.entity';
-import {Roles} from '../rol/rol.entity';
 import { Pedido } from 'src/pedido/pedido.entity';
+import { Rol } from 'src/rol/rol.entity';
 @Entity('usuarios')
 export class Usuario {
   @PrimaryGeneratedColumn()
@@ -29,9 +29,9 @@ export class Usuario {
   @Column()
   fecha_ultima_conexion: Date;
 
-  @ManyToMany(() => Roles)
+  @ManyToMany(() => Rol)
   @JoinTable({ name: 'usuarios_roles' })
-  roles: Roles[];
+  roles: Rol[];
 
   @OneToMany(() => Pedido, pedido => pedido.usuario)
   pedidos: Pedido[];

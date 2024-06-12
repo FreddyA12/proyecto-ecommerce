@@ -1,4 +1,5 @@
 import { Usuario } from 'src/usuario/usuario.entity';
+import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
 import { Detalle_pedido } from 'src/detalle_pedido/detalle_pedido.entity';
 import {
   Column,
@@ -32,6 +33,10 @@ export class Pedido {
 
   @OneToMany(() => Detalle_pedido, (detalle) => detalle.pedido)
   detalles: Detalle_pedido[];
+
+  @ManyToOne(() => MetodoPago, (metodoPago) => metodoPago.pedidos)
+  @JoinColumn({ name: 'id_metodo_pago' })
+  metodoPago: MetodoPago;
 
   // falta el id del metodo del pago
 }

@@ -1,7 +1,7 @@
-import { Producto } from 'src/producto/producto.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Producto } from "src/producto/producto.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
-@Entity('marcas')
+@Entity('marcas') // Asegúrate de que el nombre de la tabla sea correcto
 export class Marca {
   @PrimaryGeneratedColumn()
   id_marca: number;
@@ -12,7 +12,6 @@ export class Marca {
   @Column()
   descripcion: string;
 
-  @OneToMany(() => Producto, producto => producto.categoria, {
-  })
+  @OneToMany(() => Producto, producto => producto.marca) // Asegúrate de que la relación esté correctamente mapeada
   productos: Producto[];
 }

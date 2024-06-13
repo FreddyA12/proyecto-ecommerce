@@ -21,8 +21,8 @@ export class Producto {
   @Column()
   nombre: string;
 
-  @Column()
-  precio_unitario: number;
+  @Column('decimal', { precision: 10, scale: 2 })
+precio_unitario: number;
 
   @ManyToOne(() => Categoria, (categoria) => categoria.productos)
   @JoinColumn({ name: 'id_categoria' })

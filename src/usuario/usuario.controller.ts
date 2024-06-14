@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { Usuario } from './usuario.entity';
 
@@ -9,5 +9,28 @@ export class UsuarioController {
     @Post()
     async save (@Body() usuario: Usuario) {
         return await this.usuarioService.save(usuario);
+    }
+    @Get()
+    findAll(): Promise<Usuario[]> {
+        return this.usuarioService.findAll();
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: number): Promise<Usuario> {
+        return this.usuarioService.findOne(id);
+    }
+    @Get('/username/:username')
+    findOneByUsername(@Param('username') username: string): Promise<Usuario> {
+        return this.usuarioService.findOneByUsername(username);
+    }
+
+    @Put(':id')
+    update(@Param('id') id: number, @Body() updateUsuarioDto: Partial<Usuario>): Promise<Usuario> {
+        return this.usuarioService.update(id, updateUsuarioDto);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: number): Promise<void> {
+        return this.usuarioService.remove(id);
     }
 }

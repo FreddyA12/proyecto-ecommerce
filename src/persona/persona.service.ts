@@ -34,15 +34,17 @@ export class PersonaService {
     }
     async remove(id: number): Promise<void> {
         try {
-            const result = await this.personaRepository.softDelete(id);
+            const result = await this.personaRepository.delete(id);
             if (result.affected === 0) {
                 throw new NotFoundException(`No se encontró la persona con ID ${id} para eliminar`);
             }
         } catch (error) {
+            console.error('Error al eliminar la persona:', error);
             throw new InternalServerErrorException('Error al eliminar la persona');
         }
     }
     
+
     async findAll(): Promise<Persona[]> {
         try {
             return await this.personaRepository.find({ relations: ['tipoIdentificacion', 'usuario'] });

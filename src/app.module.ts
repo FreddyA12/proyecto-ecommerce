@@ -34,7 +34,8 @@ import { Devolucion } from './devolucion/devolucion.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago, Pedido, Detalle_pedido, Devolucion], // Asegúrate de incluir Pedido aquí
+      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion], 
       synchronize: true,
     }),
     UsuarioModule,
@@ -48,6 +49,7 @@ import { Devolucion } from './devolucion/devolucion.entity';
     ProductoModule,
     MetodoPagoModule,
     DevolucionModule,
+    TipoIdentificacionModule
   ],
   
 })

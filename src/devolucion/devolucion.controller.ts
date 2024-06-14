@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put ,Delete} from '@nestjs/common';
 import { DevolucionService } from './devolucion.service';
 import { DevolucionDto } from './dto/devolucion.dto';
 import { Devolucion } from './devolucion.entity';
@@ -27,4 +27,10 @@ export class DevolucionController {
     update (@Param('id') id_devolucion:number,@Body() devolucionDto:DevolucionDto): Promise<Devolucion>{
         return this.devolucionService.update(id_devolucion,devolucionDto);
     }
+
+    @Delete(':id')
+    async delete(id_devolucion:number): Promise<void>{
+       this.devolucionService.delete(id_devolucion);
+    }
+
 }

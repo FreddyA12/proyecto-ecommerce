@@ -44,27 +44,57 @@ export class PedidoService {
     
 
   // Encontrar todas las facturas
-  findAll(): Promise<Pedido[]> {
-    return this.pedidoRepository.find();
+  async findAll(): Promise<Pedido[]> {
+    return await this.pedidoRepository.find({
+      relations: ['usuario', 'metodoPago'],
+    });
   }
 
   // Encontrar una factura por ID
   async findOne(id: number): Promise<Pedido> {
-    return await this.pedidoRepository.findOne({ where: { id_pedido: id } });
-    }   
+    return await this.pedidoRepository.findOne({
+      where: { id_pedido: id },
+      relations: ['usuario', 'metodoPago'],
+    });
+  }  
 
   //actualizar pedido
-  async update(id_pedido: number, createPedidoDto: CreatePedidoDto): Promise<Pedido>{
-    const pedido= await this.pedidoRepository.findOneBy({id_pedido});
+  async update(id_pedido: number, createPedidoDto: CreatePedidoDto): Promise<Pedido> {
+    const pedido = await this.pedidoRepository.findOneBy({ id_pedido });
     if (!pedido) {
-      throw new Error('Pedido not found');
+        throw new Error('Pedido not found');
     }
-    // Fusionar los cambios del DTO con la entidad existente
-    this.pedidoRepository.merge(pedido, createPedidoDto);
-    
+
+    // Actualizar las propiedades del pedido
+    pedido.fecha = new Date(createPedidoDto.fecha);
+    pedido.total = createPedidoDto.total;
+    pedido.estado = createPedidoDto.estado;
+    pedido.subtotal = createPedidoDto.subtotal;
+
+    // Obtener y asignar el usuario
+    const usuario = await this.usuarioRepository.findOneBy({ id_usuario: createPedidoDto.id_usuario });
+    if (!usuario) {
+        throw new Error('Usuario not found');
+    }
+    pedido.usuario = usuario;
+
+    // Obtener y asignar el método de pago
+    const metodoPago = await this.metodoPagoRepository.findOneBy({ id_metodo_pago: createPedidoDto.id_metodo_pago });
+    if (!metodoPago) {
+        throw new Error('MetodoPago not found');
+    }
+    pedido.metodoPago = metodoPago;
+
     // Guardar la entidad actualizada en la base de datos
-    return await this.pedidoRepository.save(pedido);
-  }
+    await this.pedidoRepository.save(pedido);
+
+    // Recargar el pedido con sus relaciones
+    return await this.pedidoRepository.findOne({
+        where: { id_pedido },
+        relations: ['usuario', 'metodoPago'],
+    });
+}
+
 
   // Eliminar una factura
   async remove(id: number): Promise<void> {

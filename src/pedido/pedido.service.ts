@@ -32,7 +32,18 @@ export class PedidoService {
     return await this.pedidoRepository.findOne({ where: { id_pedido: id } });
     }   
 
-  
+  //actualizar pedido
+  async update(id_pedido: number, createPedidoDto: CreatePedidoDto): Promise<Pedido>{
+    const pedido= await this.pedidoRepository.findOneBy({id_pedido});
+    if (!pedido) {
+      throw new Error('Pedido not found');
+    }
+    // Fusionar los cambios del DTO con la entidad existente
+    this.pedidoRepository.merge(pedido, createPedidoDto);
+    
+    // Guardar la entidad actualizada en la base de datos
+    return await this.pedidoRepository.save(pedido);
+  }
 
   // Eliminar una factura
   async remove(id: number): Promise<void> {

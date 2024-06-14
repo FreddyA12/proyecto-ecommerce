@@ -21,7 +21,7 @@ export class Persona {
   apellido: string;
 
   @Column()
-  identificacion: string;
+  identificacion: number;
 
   @ManyToOne(() => TipoIdentificacion)
   @JoinColumn({ name: 'id_tipo_identificacion' })

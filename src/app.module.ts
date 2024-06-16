@@ -24,6 +24,7 @@ import { DevolucionController } from './devolucion/devolucion.controller';
 import { DevolucionService } from './devolucion/devolucion.service';
 import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
+import { PromocionController } from './promocion/promocion.controller';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { Devolucion } from './devolucion/devolucion.entity';
     DevolucionModule,
     TipoIdentificacionModule
   ],
+  controllers: [PromocionController],
   
 })
 export class AppModule {}

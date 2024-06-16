@@ -30,6 +30,11 @@ import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
 import { MenuModule } from './menu/menu.module';
 import { PermisoModule } from './permiso/permiso.module';
+import { PromocionController } from './promocion/promocion.controller';
+
+import { CarritoController } from './carrito/carrito.controller';
+import { CarritoModule } from './carrito/carrito.module';
+import { Carrito } from './carrito/carrito.entity';
 
 @Module({
   imports: [
@@ -45,7 +50,7 @@ import { PermisoModule } from './permiso/permiso.module';
 
 
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion,Menu, Permiso], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion,Menu, Permiso,Carrito], 
 
       synchronize: true,
     }),
@@ -58,7 +63,7 @@ import { PermisoModule } from './permiso/permiso.module';
     DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
-
+    CarritoModule,
     PromocionModule,
     MarcaModule,
     MetodoPagoModule,
@@ -70,9 +75,11 @@ import { PermisoModule } from './permiso/permiso.module';
 
     MenuModule,
 
-    PermisoModule
+    PermisoModule,
+    CarritoModule
 
   ],
+  controllers: [PromocionController, CarritoController],
   
 })
 export class AppModule {}

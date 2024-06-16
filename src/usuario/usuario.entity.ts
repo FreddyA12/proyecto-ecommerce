@@ -29,8 +29,8 @@ export class Usuario {
   @Column()
   fecha_ultima_conexion: Date;
 
-  @ManyToMany(() => Rol)
-  @JoinTable({ name: 'usuarios_roles' })
+  @ManyToMany(() => Rol, rol => rol.usuarios)
+  @JoinTable({ name: 'usuarios_roles' }) // Especifica la tabla de unión
   roles: Rol[];
 
   @OneToMany(() => Pedido, pedido => pedido.usuario)

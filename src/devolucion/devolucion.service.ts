@@ -1,4 +1,4 @@
-import { Injectable, } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException, } from '@nestjs/common';
 import { Devolucion } from './devolucion.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -19,55 +19,105 @@ export class DevolucionService {
       ) {}
 
     // Crear devolucion
-    async create(devolucionDto: DevolucionDto): Promise<Devolucion>{
-        const devolucion= this.devolucionRepository.create(devolucionDto);
-        return await this.devolucionRepository.save(devolucion);
+    async create(devolucionDto: DevolucionDto): Promise<Devolucion> {
+        try {
+            const pedido = await this.pedidoRepository.findOneBy({ id_pedido: devolucionDto.id_pedido });
+            const producto = await this.productoRepository.findOneBy({ id_producto: devolucionDto.id_producto });
+    
+            if (!pedido || !producto) {
+                throw new NotFoundException('Pedido or Producto not found');
+            }
+    
+            const devolucion = this.devolucionRepository.create({
+                ...devolucionDto,
+                pedido: pedido,
+                producto: producto,
+            });
+    
+            await this.devolucionRepository.save(devolucion);
+    
+            return await this.devolucionRepository.findOne({
+                where: { id_devolucion: devolucion.id_devolucion },
+                relations: ['pedido', 'producto'],
+            });
+        } catch (error) {
+            console.error('Error al crear la devolución:', error);
+            throw new BadRequestException('Error al crear la devolución');
+        }
     }
+    
 
     // Obtener todas
 
-    async findAll(): Promise<Devolucion[]>{
-        return await this.devolucionRepository.find();
+    async findAll(): Promise<Devolucion[]> {
+        try {
+            return await this.devolucionRepository.find({
+                relations: ['pedido', 'producto'],
+            });
+        } catch (error) {
+            console.error('Error al obtener todas las devoluciones:', error);
+            throw new InternalServerErrorException('Error al obtener todas las devoluciones');
+        }
     }
 
 
     // obtener por id
 
-    async findOne(id_devolucion: number): Promise<Devolucion>{
-        const devolucion = await this.devolucionRepository.findOne({ where: { id_devolucion } });
-        if (!devolucion) {
-            throw new Error('Devolucion not found');
+    async findOne(id_devolucion: number): Promise<Devolucion> {
+        try {
+            const devolucion = await this.devolucionRepository.findOne({
+                where: { id_devolucion },
+                relations: ['pedido', 'producto'],
+            });
+    
+            if (!devolucion) {
+                throw new NotFoundException(`Devolución con ID ${id_devolucion} no encontrada`);
+            }
+    
+            return devolucion;
+        } catch (error) {
+            console.error('Error al encontrar la devolución:', error);
+            throw new NotFoundException(`Error al encontrar la devolución, es posible que tenga relaciones`);
         }
-        return devolucion;
     }
+    
 
 
     // actualizar 
 
-    async update (id_devolucion:number, devolucionDto:DevolucionDto): Promise<Devolucion>{
-        const devolucion = await this.devolucionRepository.findOneBy({ id_devolucion }); 
-        if (!devolucion) {
-            throw new Error('Devolucion not found');
+    async update(id_devolucion: number, devolucionDto: DevolucionDto): Promise<Devolucion> {
+        try {
+            const devolucion = await this.devolucionRepository.findOne({ where: { id_devolucion } });
+            if (!devolucion) {
+                throw new NotFoundException('Devolución no encontrada');
+            }
+
+            const pedido = await this.pedidoRepository.findOne({ where: { id_pedido: devolucionDto.id_pedido } });
+            const producto = await this.productoRepository.findOne({ where: { id_producto: devolucionDto.id_producto } });
+
+            if (!pedido || !producto) {
+                throw new NotFoundException('Pedido o Producto no encontrado');
+            }
+
+            devolucion.pedido = pedido;
+            devolucion.producto = producto;
+            devolucion.motivo = devolucionDto.motivo;
+            devolucion.cantidad = devolucionDto.cantidad;
+            devolucion.fecha_devolucion = new Date(devolucionDto.fecha_devolucion);
+
+            await this.devolucionRepository.save(devolucion);
+
+            return await this.devolucionRepository.findOne({
+                where: { id_devolucion },
+                relations: ['pedido', 'producto'],
+            });
+        } catch (error) {
+            console.error('Error al actualizar la devolución:', error);
+            throw new InternalServerErrorException('Error al actualizar la devolución');
         }
-        const pedido = await this.pedidoRepository.findOneBy({ id_pedido: devolucionDto.id_pedido });
-        const producto = await this.productoRepository.findOneBy({ id_producto: devolucionDto.id_producto });
-
-        if (!pedido || !producto) {
-            throw new Error('Pedido or Producto not found');
-        }
-
-        devolucion.pedido = pedido;
-        devolucion.producto = producto;
-        devolucion.motivo = devolucionDto.motivo;
-        devolucion.cantidad = devolucionDto.cantidad;
-        devolucion.fecha_devolucion = new Date(devolucionDto.fecha_devolucion);
-
-        await this.devolucionRepository.save(devolucion);
-        
-        return devolucion;
-
-
     }
+    
+    
 
     //eliminar 
 

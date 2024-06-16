@@ -1,4 +1,5 @@
 import { Usuario } from 'src/usuario/usuario.entity';
+import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
 import { Detalle_pedido } from 'src/detalle_pedido/detalle_pedido.entity';
 
 import {
@@ -9,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
 } from 'typeorm';
-import { MetodoPago } from 'src/metodo-pago/metodo-pago.entity';
+
 import { Devolucion } from 'src/devolucion/devolucion.entity';
 
 @Entity('pedidos') // aqui va el nombre de la tabla de la base

@@ -11,6 +11,7 @@ import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.en
 import { Rol } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
+import { PromocionModule } from './promocion/promocion.module';
 import { MarcaModule } from './marca/marca.module';
 import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
 import { Pedido } from './pedido/pedido.entity'; // Asegúrate de importar la entidad Pedido
@@ -24,6 +25,11 @@ import { DevolucionController } from './devolucion/devolucion.controller';
 import { DevolucionService } from './devolucion/devolucion.service';
 import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
+import { PromocionController } from './promocion/promocion.controller';
+import { Promocion } from './promocion/promocion.entity';
+import { CarritoController } from './carrito/carrito.controller';
+import { CarritoModule } from './carrito/carrito.module';
+import { Carrito } from './carrito/carrito.entity';
 
 @Module({
   imports: [
@@ -34,8 +40,13 @@ import { Devolucion } from './devolucion/devolucion.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
+
+    
+
+
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion, Carrito], 
+
       synchronize: true,
     }),
     UsuarioModule,
@@ -47,10 +58,20 @@ import { Devolucion } from './devolucion/devolucion.entity';
     DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
+    CarritoModule,
+    PromocionModule,
+    MarcaModule,
+    MetodoPagoModule,
+
     MetodoPagoModule,
     DevolucionModule,
-    TipoIdentificacionModule
+
+    TipoIdentificacionModule,
+
+    CarritoModule
+
   ],
+  controllers: [PromocionController, CarritoController],
   
 })
 export class AppModule {}

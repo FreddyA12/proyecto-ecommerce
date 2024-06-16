@@ -29,6 +29,7 @@ import { PromocionController } from './promocion/promocion.controller';
 import { Promocion } from './promocion/promocion.entity';
 import { CarritoController } from './carrito/carrito.controller';
 import { CarritoModule } from './carrito/carrito.module';
+import { Carrito } from './carrito/carrito.entity';
 
 @Module({
   imports: [
@@ -44,7 +45,7 @@ import { CarritoModule } from './carrito/carrito.module';
 
 
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion, Carrito], 
 
       synchronize: true,
     }),
@@ -57,7 +58,7 @@ import { CarritoModule } from './carrito/carrito.module';
     DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
-
+    CarritoModule,
     PromocionModule,
     MarcaModule,
     MetodoPagoModule,

@@ -2,7 +2,7 @@
 import { Categoria } from 'src/categoria/categoria.entity';
 import { Marca } from 'src/marca/marca.entity';
 import { Detalle_pedido } from 'src/detalle_pedido/detalle_pedido.entity';
-
+import { DetalleCarrito } from '../detalle_carrito/detalle_carrito.entity';
 import {
   Entity,
   Column,
@@ -46,4 +46,7 @@ precio_unitario: number;
   //Agregar mas relaciones de acuerdo al mapeo
   @OneToMany(() => Devolucion, devolucion => devolucion.producto)
   devoluciones: Devolucion[];
+
+  @ManyToOne(() => DetalleCarrito, detalleCarrito => detalleCarrito.productos)
+  detalleCarrito: DetalleCarrito;
 }

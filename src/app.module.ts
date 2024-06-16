@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
+import {Promocion} from './promocion/promocion.entity';
 import { Rol } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
@@ -40,7 +41,7 @@ import { Devolucion } from './devolucion/devolucion.entity';
 
 
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion], 
 
       synchronize: true,
     }),

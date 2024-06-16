@@ -11,6 +11,7 @@ import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.en
 import { Rol } from './rol/rol.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
+import { PromocionModule } from './promocion/promocion.module';
 import { MarcaModule } from './marca/marca.module';
 import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
 import { Pedido } from './pedido/pedido.entity'; // Asegúrate de importar la entidad Pedido
@@ -35,8 +36,13 @@ import { PromocionController } from './promocion/promocion.controller';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
+
+    
+
+
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
          Pedido, Detalle_pedido, Devolucion, TipoIdentificacion], 
+
       synchronize: true,
     }),
     UsuarioModule,
@@ -48,9 +54,16 @@ import { PromocionController } from './promocion/promocion.controller';
     DetallePedidoModule,
     CategoriaModule,
     ProductoModule,
+
+    PromocionModule,
+    MarcaModule,
+    MetodoPagoModule,
+
     MetodoPagoModule,
     DevolucionModule,
+
     TipoIdentificacionModule
+
   ],
   controllers: [PromocionController],
   

@@ -7,8 +7,8 @@ export class Carrito{
     @PrimaryGeneratedColumn()
     id_carrito: number;
 
-    @Column()
-    total:number;
+    @Column('decimal', { precision: 10, scale: 2 })
+    total: number;
     
     @Column()
     estado:string;

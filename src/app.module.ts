@@ -7,6 +7,8 @@ import { RolModule } from './rol/rol.module';
 import { AuthModule } from './auth/auth.module';
 import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
+import { Menu } from './menu/menu.entity';
+import { Permiso } from './permiso/permiso.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
 import {Promocion} from './promocion/promocion.entity';
 import { Rol } from './rol/rol.entity';
@@ -26,6 +28,8 @@ import { DevolucionController } from './devolucion/devolucion.controller';
 import { DevolucionService } from './devolucion/devolucion.service';
 import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
+import { MenuModule } from './menu/menu.module';
+import { PermisoModule } from './permiso/permiso.module';
 
 @Module({
   imports: [
@@ -41,7 +45,7 @@ import { Devolucion } from './devolucion/devolucion.entity';
 
 
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion,Menu, Permiso], 
 
       synchronize: true,
     }),
@@ -62,7 +66,11 @@ import { Devolucion } from './devolucion/devolucion.entity';
     MetodoPagoModule,
     DevolucionModule,
 
-    TipoIdentificacionModule
+    TipoIdentificacionModule,
+
+    MenuModule,
+
+    PermisoModule
 
   ],
   

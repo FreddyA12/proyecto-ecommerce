@@ -26,6 +26,9 @@ import { DevolucionService } from './devolucion/devolucion.service';
 import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
 import { PromocionController } from './promocion/promocion.controller';
+import { Promocion } from './promocion/promocion.entity';
+import { CarritoController } from './carrito/carrito.controller';
+import { CarritoModule } from './carrito/carrito.module';
 
 @Module({
   imports: [
@@ -41,7 +44,7 @@ import { PromocionController } from './promocion/promocion.controller';
 
 
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion], 
 
       synchronize: true,
     }),
@@ -62,10 +65,12 @@ import { PromocionController } from './promocion/promocion.controller';
     MetodoPagoModule,
     DevolucionModule,
 
-    TipoIdentificacionModule
+    TipoIdentificacionModule,
+
+    CarritoModule
 
   ],
-  controllers: [PromocionController],
+  controllers: [PromocionController, CarritoController],
   
 })
 export class AppModule {}

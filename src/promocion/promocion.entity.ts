@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 @Entity('promociones')
 export class Promocion {
   @PrimaryGeneratedColumn()
-  id_promociones: number;
+  id_promocion: number;
 
   @Column()
   descuento: number;

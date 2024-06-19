@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { CarritoDto } from './carrito.dto';
 import { Carrito } from './carrito.entity';
 import { CarritoService } from './carrito.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Carritos')
 @Controller('/carrito')
 export class CarritoController {
 

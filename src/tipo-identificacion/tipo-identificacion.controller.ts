@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { TipoIdentificacion } from './tipo-identificacion.entity';
 import { TipoIdentificacionService } from './tipo-identificacion.service';
+import { ApiTags } from '@nestjs/swagger/dist/decorators';
 
+@ApiTags('Tipos de Identificacioness')
 @Controller('identificaciones')
 export class TipoIdentificacionController {
     constructor(private readonly tipoIdentificacionService: TipoIdentificacionService) {}

@@ -2,7 +2,10 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { PedidoService } from './pedido.service';
 import { CreatePedidoDto } from './dto/pedido.dto';
 import { Pedido } from './pedido.entity';
+import { ApiTags } from '@nestjs/swagger/dist/decorators';
 
+
+@ApiTags('Pedidos')
 @Controller('/pedidos') // aqui va la ruta
 export class PedidoController {
     constructor(private readonly pedidoService: PedidoService) {}

@@ -3,7 +3,9 @@ import { MarcaService } from './marca.service';
 
 import { Marca } from './marca.entity';
 import { createMarcaDTO } from './create-marca-dto';
+import { ApiTags } from '@nestjs/swagger/dist/decorators';
 
+@ApiTags('Marcas')
 @Controller('marcas')
 export class MarcaController {
     constructor(private readonly marcaService: MarcaService) {}

@@ -1,7 +1,7 @@
+import { ApiTags } from "@nestjs/swagger/dist/decorators";
 import { Pedido } from "src/pedido/pedido.entity";
 import { Producto } from "src/producto/producto.entity";
 import { Column, Entity,  JoinColumn,  ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-
 
 @Entity('devoluciones')
 export class Devolucion{

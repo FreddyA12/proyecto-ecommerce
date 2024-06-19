@@ -2,7 +2,9 @@ import { Body, Controller, Post, Get, Put, Param, Delete } from '@nestjs/common'
 import { MetodoPagoService } from './metodo-pago.service';
 import { MetodoPago } from './metodo-pago.entity';
 import { DtoMetodoPago } from './dto/metodo-pago.dto';
+import { ApiTags } from '@nestjs/swagger/dist/decorators';
 
+@ApiTags('Metodos de Pagos')
 @Controller('/metodo-pago')
 export class MetodoPagoController {
 

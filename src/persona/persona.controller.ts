@@ -2,7 +2,9 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { PersonaService } from './persona.service';
 import { Persona } from './persona.entity';
+import { ApiTags } from '@nestjs/swagger/dist/decorators';
 
+@ApiTags('Personas')
 @Controller('personas')
 export class PersonaController {
     constructor(private readonly personaService: PersonaService) {}

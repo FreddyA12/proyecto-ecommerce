@@ -7,8 +7,12 @@ import { RolModule } from './rol/rol.module';
 import { AuthModule } from './auth/auth.module';
 import { Usuario } from './usuario/usuario.entity';
 import { Persona } from './persona/persona.entity';
+import { Menu } from './menu/menu.entity';
+import { Permiso } from './permiso/permiso.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
+import {Promocion} from './promocion/promocion.entity';
 import { Rol } from './rol/rol.entity';
+import { DetalleCarrito } from './detalle_carrito/detalle_carrito.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
 import { PromocionModule } from './promocion/promocion.module';
@@ -21,15 +25,16 @@ import { Categoria } from './categoria/categoria.entity';
 import { Producto } from './producto/producto.entity';
 import { DetallePedidoModule } from './detalle_pedido/detalle_pedido.module';
 import { Detalle_pedido } from './detalle_pedido/detalle_pedido.entity';
-import { DevolucionController } from './devolucion/devolucion.controller';
-import { DevolucionService } from './devolucion/devolucion.service';
 import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
+import { MenuModule } from './menu/menu.module';
+import { PermisoModule } from './permiso/permiso.module';
 import { PromocionController } from './promocion/promocion.controller';
-import { Promocion } from './promocion/promocion.entity';
+
 import { CarritoController } from './carrito/carrito.controller';
 import { CarritoModule } from './carrito/carrito.module';
 import { Carrito } from './carrito/carrito.entity';
+import { DetalleCarritoModule } from './detalle_carrito/detalle_carrito.module';
 
 @Module({
   imports: [
@@ -45,7 +50,7 @@ import { Carrito } from './carrito/carrito.entity';
 
 
       entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion, Carrito], 
+         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion,Menu, Permiso,Carrito,DetalleCarrito], 
 
       synchronize: true,
     }),
@@ -68,7 +73,11 @@ import { Carrito } from './carrito/carrito.entity';
 
     TipoIdentificacionModule,
 
-    CarritoModule
+    MenuModule,
+
+    PermisoModule,
+    CarritoModule,
+    DetalleCarritoModule
 
   ],
   controllers: [PromocionController, CarritoController],

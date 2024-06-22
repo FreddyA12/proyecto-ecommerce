@@ -2,7 +2,9 @@ import { Body, Controller, Get, Param, Post, Put ,Delete} from '@nestjs/common';
 import { DevolucionService } from './devolucion.service';
 import { DevolucionDto } from './dto/devolucion.dto';
 import { Devolucion } from './devolucion.entity';
+import { ApiTags } from '@nestjs/swagger/dist/decorators';
 
+@ApiTags('Devoluciones')
 @Controller('/devolucion')
 export class DevolucionController {
 

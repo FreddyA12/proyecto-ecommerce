@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Permiso } from './permiso.entity';
 import { CreatePermisoDTO } from './create-permiso-dto';
 import { Rol } from '../rol/rol.entity';
+import { Usuario } from 'src/usuario/usuario.entity';
 
 @Injectable()
 export class PermisoService {
@@ -11,7 +12,9 @@ export class PermisoService {
     @InjectRepository(Permiso)
     private readonly permisoRepository: Repository<Permiso>,
     @InjectRepository(Rol)
-    private readonly rolRepository: Repository<Rol>
+    private readonly rolRepository: Repository<Rol>,
+    @InjectRepository(Usuario)
+    private usuarioRepository: Repository<Usuario>
   ) {}
 
   async create(createPermisoDTO: CreatePermisoDTO): Promise<Permiso> {
@@ -81,5 +84,45 @@ export class PermisoService {
     } catch (error) {
       throw new InternalServerErrorException(`Error en la eliminación, es posible que tenga relaciones`);
     }
+  }
+
+  async getUserPermissions(userId: number): Promise<string[]> {
+    const user = await this.usuarioRepository.findOne({
+      where: { id_usuario: userId },
+      relations: ['roles', 'roles.permisos'],
+    });
+
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+
+    const permisos = new Set<string>();
+    user.roles.forEach(role => {
+      role.permisos.forEach(permiso => {
+        permisos.add(permiso.nombre);
+      });
+    });
+
+    return Array.from(permisos);
+  }
+
+  async getUserModules(userId: number): Promise<string[]> {
+    const user = await this.usuarioRepository.findOne({
+      where: { id_usuario: userId },
+      relations: ['roles', 'roles.menus'],
+    });
+
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+
+    const menus = new Set<string>();
+    user.roles.forEach(role => {
+      role.menus.forEach(menu => {
+        menus.add(menu.nombre_menu);
+      });
+    });
+
+    return Array.from(menus);
   }
 }

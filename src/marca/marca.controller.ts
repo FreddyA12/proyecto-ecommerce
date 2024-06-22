@@ -1,36 +1,53 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Request, ForbiddenException } from '@nestjs/common';
 import { MarcaService } from './marca.service';
 import { Marca } from './marca.entity';
 import { createMarcaDTO } from './create-marca-dto';
-import { ApiTags } from '@nestjs/swagger/dist/decorators';
+import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { ModuleAccess } from 'src/auth/decorators/module.decorator';
+import { PermisosGuard } from 'src/auth/guards/permisos.guards';
+import { Permissions } from 'src/auth/decorators/permissions.decorator';
 
 @ApiTags('Marcas')
 @Controller('marcas')
+@UseGuards(JwtAuthGuard, PermisosGuard)
 export class MarcaController {
-    constructor(private readonly marcaService: MarcaService) {}
-    
+  constructor(
+    private readonly marcaService: MarcaService
+  ) {}
+
   @Post()
-  create(@Body() createCategoriaDto: createMarcaDTO): Promise<Marca> {
-    return this.marcaService.create(createCategoriaDto);
+  @ModuleAccess('MARCAS')
+  @Permissions('CREAR')
+  async create(@Request() req, @Body() createMarcaDto: createMarcaDTO): Promise<Marca> {
+    return this.marcaService.create(createMarcaDto);
   }
 
+
   @Get()
-  findAll(): Promise<Marca[]> {
+  @ModuleAccess('MARCAS')
+  async findAll(@Request() req): Promise<Marca[]> {
     return this.marcaService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<Marca> {
+  @ModuleAccess('MARCAS')
+  async findOne(@Request() req, @Param('id') id: number): Promise<Marca> {
     return this.marcaService.findOne(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() updateCategoriaDto: createMarcaDTO): Promise<Marca> {
-    return this.marcaService.update(id, updateCategoriaDto);
+  @ModuleAccess('MARCAS')
+  @Permissions('EDITAR')
+  async update(@Request() req, @Param('id') id: number, @Body() updateMarcaDto: createMarcaDTO): Promise<Marca> {
+    return this.marcaService.update(id, updateMarcaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number): Promise<void> {
+  @ModuleAccess('MARCAS')
+  @Permissions('ELIMINAR')
+  async remove(@Request() req, @Param('id') id: number): Promise<void> {
     return this.marcaService.remove(id);
   }
+
 }

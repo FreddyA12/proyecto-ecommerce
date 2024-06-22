@@ -35,6 +35,9 @@ import { CarritoController } from './carrito/carrito.controller';
 import { CarritoModule } from './carrito/carrito.module';
 import { Carrito } from './carrito/carrito.entity';
 import { DetalleCarritoModule } from './detalle_carrito/detalle_carrito.module';
+import { APP_GUARD } from '@nestjs/core';
+import { PermisosGuard } from './auth/guards/permisos.guards';
+import { PermisoService } from './permiso/permiso.service';
 
 @Module({
   imports: [
@@ -81,6 +84,12 @@ import { DetalleCarritoModule } from './detalle_carrito/detalle_carrito.module';
 
   ],
   controllers: [PromocionController, CarritoController],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: PermisosGuard,
+    }
+  ],
   
 })
 export class AppModule {}

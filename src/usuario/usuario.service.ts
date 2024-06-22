@@ -10,9 +10,9 @@ export class UsuarioService {
         @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>,
     ) { }
 
-    async findOneByUsername(nombre_usuario: string,): Promise<Usuario | undefined> {
-        return await this.usuarioRepository.findOne({ where: { nombre_usuario } });
-    }
+    async findOneByUsername(nombre_usuario: string, options = {}): Promise<Usuario | undefined> {
+        return await this.usuarioRepository.findOne({ where: { nombre_usuario }, ...options });
+      }
     async findAll(): Promise<Usuario[]> {
         return await this.usuarioRepository.find({ relations: ['persona', 'roles', 'pedidos'] });
     }

@@ -4,10 +4,11 @@ import { PermisoService } from './permiso.service';
 import { PermisoController } from './permiso.controller';
 import { Permiso } from './permiso.entity';
 import { Rol } from '../rol/rol.entity';
+import { Usuario } from 'src/usuario/usuario.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Permiso, Rol])
+    TypeOrmModule.forFeature([Permiso, Rol,Usuario])
   ],
   providers: [PermisoService],
   controllers: [PermisoController]

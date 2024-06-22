@@ -7,6 +7,12 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { LocalGuard } from './guards/local.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UsuarioModule } from 'src/usuario/usuario.module';
+import { PermisoModule } from 'src/permiso/permiso.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Marca } from 'src/marca/marca.entity';
+import { Permiso } from 'src/permiso/permiso.entity';
+import { Rol } from 'src/rol/rol.entity';
+import { Usuario } from 'src/usuario/usuario.entity';
 
 @Module({
   imports: [
@@ -15,7 +21,9 @@ import { UsuarioModule } from 'src/usuario/usuario.module';
       secret: 'somoslosmejores',
       signOptions: { expiresIn: '1d' },
     }),
-    UsuarioModule, // implementar el modulo de usuarios
+    UsuarioModule,
+    PermisoModule, // Asegúrate de importar PermisoModule aquí
+    TypeOrmModule.forFeature([Marca, Permiso, Rol, Usuario]),
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, LocalGuard, JwtStrategy],

@@ -7,23 +7,24 @@ import { UsuarioService } from 'src/usuario/usuario.service';
 @Injectable()
 export class AuthService {
   constructor(
-    private usuarioService: UsuarioService, // buscar de donde se almacena el usuario, en nuestra base de la tabla usuarios
+    private usuarioService: UsuarioService,
     private jwtService: JwtService,
   ) {}
 
   async validateUser({ nombre_usuario, password }: AuthPayloadDTO) {
-    const findUser =
-      await this.usuarioService.findOneByUsername(nombre_usuario);
+    const findUser = await this.usuarioService.findOneByUsername(nombre_usuario, { relations: ['roles'] });
     if (!findUser) {
-      throw new UnauthorizedException('Credenciales invalidas');
+      throw new UnauthorizedException('Credenciales inválidas');
     }
-
     const isMatch = await bcrypt.compare(password, findUser.password);
     if (isMatch) {
-      const { password, persona, fecha_registro, ...userDetails } = findUser;
-      return this.jwtService.sign(userDetails); 
+      const { password, persona, fecha_registro, roles, ...userDetails } = findUser;
+      const userRoles = roles.map(rol => rol.tipo_rol); 
+      return {
+        token: this.jwtService.sign({ ...userDetails, roles: userRoles }),
+      };
     }
 
-    throw new UnauthorizedException('Credenciales invalidas');
+    throw new UnauthorizedException('Credenciales inválidas');
   }
 }

@@ -25,7 +25,7 @@ export class DevolucionService {
             const producto = await this.productoRepository.findOneBy({ id_producto: devolucionDto.id_producto });
     
             if (!pedido || !producto) {
-                throw new NotFoundException('Pedido or Producto not found');
+                throw new NotFoundException('Pedido o Producto no encontrado');
             }
     
             const devolucion = this.devolucionRepository.create({
@@ -34,10 +34,14 @@ export class DevolucionService {
                 producto: producto,
             });
     
-            await this.devolucionRepository.save(devolucion);
+            const savedDevolucion = await this.devolucionRepository.save(devolucion);
+    
+            // Actualiza el stock del producto
+            producto.stock += devolucionDto.cantidad;
+            await this.productoRepository.save(producto);
     
             return await this.devolucionRepository.findOne({
-                where: { id_devolucion: devolucion.id_devolucion },
+                where: { id_devolucion: savedDevolucion.id_devolucion },
                 relations: ['pedido', 'producto'],
             });
         } catch (error) {
@@ -45,6 +49,7 @@ export class DevolucionService {
             throw new BadRequestException('Error al crear la devolución');
         }
     }
+    
     
 
     // Obtener todas
@@ -121,13 +126,21 @@ export class DevolucionService {
 
     //eliminar 
 
-    async delete(id_devolucion:number): Promise<void>{
-        const devolucion = await this.devolucionRepository.findOneBy({ id_devolucion }); 
+    async delete(id_devolucion: number): Promise<void> {
+        const devolucion = await this.devolucionRepository.findOneBy({ id_devolucion });
         if (!devolucion) {
-            throw new Error('Devolucion not found');
+            throw new Error('Devolución no encontrada');
         }
+    
+        const producto = await this.productoRepository.findOneBy({ id_producto: devolucion.producto.id_producto });
+        if (producto) {
+            producto.stock -= devolucion.cantidad;
+            await this.productoRepository.save(producto);
+        }
+    
         await this.devolucionRepository.remove(devolucion);
     }
+    
 
 
 }

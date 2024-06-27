@@ -1,19 +1,19 @@
 import { IsInt, IsDecimal, IsNotEmpty } from 'class-validator';
 
-export class CreateDetalleCarritoDTO {
-  @IsNotEmpty()
+export class CreateDetalleCarritoDto {
   @IsInt()
+  @IsNotEmpty()
   id_carrito: number;
 
-  @IsNotEmpty()
   @IsInt()
+  @IsNotEmpty()
   cantidad: number;
 
-  @IsNotEmpty()
   @IsDecimal()
+  @IsNotEmpty()
   subtotal: number;
 
-  @IsNotEmpty()
   @IsInt()
+  @IsNotEmpty()
   id_producto: number;
 }

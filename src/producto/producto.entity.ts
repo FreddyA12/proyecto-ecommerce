@@ -43,10 +43,11 @@ precio_unitario: number;
 
   @OneToMany(() => Detalle_pedido, (detalle) => detalle.producto)
   detalles: Detalle_pedido[];
+
   //Agregar mas relaciones de acuerdo al mapeo
   @OneToMany(() => Devolucion, devolucion => devolucion.producto)
   devoluciones: Devolucion[];
 
-  @ManyToOne(() => DetalleCarrito, detalleCarrito => detalleCarrito.productos)
-  detalleCarrito: DetalleCarrito;
+ @OneToMany(() => DetalleCarrito, detalleCarrito => detalleCarrito.producto)
+  detalleCarrito: DetalleCarrito[];
 }

@@ -28,6 +28,7 @@ export class CategoriasController {
   findAll(): Promise<Categoria[]> {
     return this.categoriasService.findAll();
   }
+  
 
   @Get(':id')
   @ModuleAccess('CATEGORIAS')

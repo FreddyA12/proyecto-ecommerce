@@ -10,7 +10,7 @@ import { Persona } from './persona/persona.entity';
 import { Menu } from './menu/menu.entity';
 import { Permiso } from './permiso/permiso.entity';
 import { TipoIdentificacion } from './tipo-identificacion/tipo-identificacion.entity';
-import {Promocion} from './promocion/promocion.entity';
+import { Promocion } from './promocion/promocion.entity';
 import { Rol } from './rol/rol.entity';
 import { DetalleCarrito } from './detalle_carrito/detalle_carrito.entity';
 import { CategoriaModule } from './categoria/categoria.module';
@@ -18,7 +18,7 @@ import { ProductoModule } from './producto/producto.module';
 import { PromocionModule } from './promocion/promocion.module';
 import { MarcaModule } from './marca/marca.module';
 import { MetodoPagoModule } from './metodo-pago/metodo-pago.module';
-import { Pedido } from './pedido/pedido.entity'; // Asegúrate de importar la entidad Pedido
+import { Pedido } from './pedido/pedido.entity';
 import { MetodoPago } from './metodo-pago/metodo-pago.entity';
 import { Marca } from './marca/marca.entity';
 import { Categoria } from './categoria/categoria.entity';
@@ -29,15 +29,12 @@ import { DevolucionModule } from './devolucion/devolucion.module';
 import { Devolucion } from './devolucion/devolucion.entity';
 import { MenuModule } from './menu/menu.module';
 import { PermisoModule } from './permiso/permiso.module';
-import { PromocionController } from './promocion/promocion.controller';
-
 import { CarritoController } from './carrito/carrito.controller';
 import { CarritoModule } from './carrito/carrito.module';
 import { Carrito } from './carrito/carrito.entity';
 import { DetalleCarritoModule } from './detalle_carrito/detalle_carrito.module';
 import { APP_GUARD } from '@nestjs/core';
 import { PermisosGuard } from './auth/guards/permisos.guards';
-import { PermisoService } from './permiso/permiso.service';
 
 @Module({
   imports: [
@@ -48,13 +45,10 @@ import { PermisoService } from './permiso/permiso.service';
       username: 'postgres',
       password: 'postgres',
       database: 'ecommerce',
-
-    
-
-
-      entities: [Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
-         Pedido, Detalle_pedido, Devolucion, TipoIdentificacion, Promocion,Menu, Permiso,Carrito,DetalleCarrito], 
-
+      entities: [
+        Usuario, Persona, TipoIdentificacion, Rol, Marca, Categoria, Producto, MetodoPago,
+        Pedido, Detalle_pedido, Devolucion, Promocion, Menu, Permiso, Carrito, DetalleCarrito
+      ],
       synchronize: true,
     }),
     UsuarioModule,
@@ -68,28 +62,18 @@ import { PermisoService } from './permiso/permiso.service';
     ProductoModule,
     CarritoModule,
     PromocionModule,
-    MarcaModule,
-    MetodoPagoModule,
-
     MetodoPagoModule,
     DevolucionModule,
-
-    TipoIdentificacionModule,
-
     MenuModule,
-
     PermisoModule,
-    CarritoModule,
     DetalleCarritoModule
-
   ],
-  controllers: [PromocionController, CarritoController],
+  controllers: [CarritoController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: PermisosGuard,
     }
   ],
-  
 })
 export class AppModule {}

@@ -17,7 +17,7 @@ export class DetalleCarrito {
   @JoinColumn({ name: 'id_carrito' })
   carrito: Carrito;
 
-  @OneToMany(() => Producto, producto => producto.detalleCarrito)
+  @ManyToOne(() => Producto, producto => producto.detalleCarrito)
   @JoinColumn({ name: 'id_producto' })
-  productos: Producto[];
+  producto: Producto;
 }

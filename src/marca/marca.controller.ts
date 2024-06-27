@@ -49,5 +49,6 @@ export class MarcaController {
   async remove(@Request() req, @Param('id') id: number): Promise<void> {
     return this.marcaService.remove(id);
   }
+  
 
 }

@@ -5,6 +5,7 @@ import {
   OneToOne,
   JoinColumn,
   ManyToOne,
+  Unique,
 } from 'typeorm';
 import { Usuario } from '../usuario/usuario.entity';
 import { TipoIdentificacion } from '../tipo-identificacion/tipo-identificacion.entity';
@@ -20,7 +21,7 @@ export class Persona {
   @Column()
   apellido: string;
 
-  @Column()
+  @Column( Unique)
   identificacion: number;
 
   @ManyToOne(() => TipoIdentificacion)

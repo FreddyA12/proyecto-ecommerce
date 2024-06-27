@@ -40,14 +40,24 @@ export class PermisosGuard implements CanActivate {
     const userPermissions = await this.permisoService.getUserPermissions(user.id_usuario);
     const userModules = await this.permisoService.getUserModules(user.id_usuario);
     
+
     if (requiredModule && !userModules.includes(requiredModule)) {
       throw new ForbiddenException('No tienes permisos para acceder a este módulo');
     }
 
-    if (requiredPermissions && !requiredPermissions.every(permission => userPermissions.includes(permission))) {
+    if (requiredPermissions && !this.coincidencias(userPermissions, requiredPermissions))   {
       throw new ForbiddenException('No tienes permisos para realizar esta acción');
     }
 
     return true;
   }
+
+   coincidencias(arr1, arr2) {
+    return arr1.some(element => arr2.includes(element));
+  }
+  
+  
+  
+
+  
 }

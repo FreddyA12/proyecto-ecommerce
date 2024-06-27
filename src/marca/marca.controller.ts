@@ -18,7 +18,7 @@ export class MarcaController {
 
   @Post()
   @ModuleAccess('MARCAS')
-  @Permissions('CREAR')
+  @Permissions('CREARPRIVILEGIADO')
   async create(@Request() req, @Body() createMarcaDto: createMarcaDTO): Promise<Marca> {
     return this.marcaService.create(createMarcaDto);
   }
@@ -26,29 +26,30 @@ export class MarcaController {
 
   @Get()
   @ModuleAccess('MARCAS')
+  @Permissions('VISUALIZARPRIVILEGIADO', 'VISUALIZAR')
   async findAll(@Request() req): Promise<Marca[]> {
     return this.marcaService.findAll();
   }
 
   @Get(':id')
   @ModuleAccess('MARCAS')
+  @Permissions('VISUALIZARPRIVILEGIADO', 'VISUALIZAR')
   async findOne(@Request() req, @Param('id') id: number): Promise<Marca> {
     return this.marcaService.findOne(id);
   }
 
   @Put(':id')
   @ModuleAccess('MARCAS')
-  @Permissions('EDITAR')
+  @Permissions('EDITARPRIVILEGIADO')
   async update(@Request() req, @Param('id') id: number, @Body() updateMarcaDto: createMarcaDTO): Promise<Marca> {
     return this.marcaService.update(id, updateMarcaDto);
   }
 
   @Delete(':id')
   @ModuleAccess('MARCAS')
-  @Permissions('ELIMINAR')
+  @Permissions('ELIMINARPRIVILEGIADO')
   async remove(@Request() req, @Param('id') id: number): Promise<void> {
     return this.marcaService.remove(id);
   }
   
-
 }

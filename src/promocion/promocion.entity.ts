@@ -11,10 +11,15 @@ export class Promocion {
 
   @Column()
   descripcion: string;
+
   @Column({ type: 'timestamp' })
   fecha_inicio: Date;
+
   @Column({ type: 'timestamp' })
   fecha_fin: Date;
+
+  @Column()
+  estado: string;  // Puede ser 'activo' o 'no activo'
 
   @OneToMany(() => Detalle_pedido, (detalle) => detalle.promocion)
   detalles: Detalle_pedido[];

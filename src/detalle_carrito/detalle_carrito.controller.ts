@@ -11,6 +11,7 @@ import { Permissions } from 'src/auth/decorators/permissions.decorator';
 @ApiTags('detalle_carrito')
 @Controller('detalles_carrito')
 @UseGuards(JwtAuthGuard, PermisosGuard)
+
 export class DetalleCarritoController {
   constructor(private readonly detalleCarritoService: DetalleCarritoService) {}
 
